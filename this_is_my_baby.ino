@@ -47,9 +47,9 @@ const int ci_Clamp_Motor = 12;//180
 const int ci_Push_Motor = 13;
 
 const int ci_Light_Sensor_Back = A0;
-const int ci_Light_Sensor_Front = A1;
-const int ci_Light_Sensor_left = A2;
-const int ci_Light_Sensor_right = A4;
+//const int ci_Light_Sensor_Front = A1;
+//const int ci_Light_Sensor_left = A2;
+//const int ci_Light_Sensor_right = A4;
 
 
 //constants
@@ -316,26 +316,31 @@ if((ul_Echo_Time_Front/58>20)&&(ul_Echo_Time_Side_Front/58<=9)&&(ul_Echo_Time_Si
   
    servo_LeftMotor.writeMicroseconds(1900);//go straight 
    servo_RightMotor.writeMicroseconds(1900);
+   
 }
 if((ul_Echo_Time_Side_Front/58>9)&&(ul_Echo_Time_Side_Back/58>9)&&(ul_Echo_Time_Front/58>20))//if both greater then 9 right
 {
   servo_LeftMotor.writeMicroseconds(1900);
    servo_RightMotor.writeMicroseconds(1700);
+   
 }
 if((ul_Echo_Time_Side_Front/58<7)&&(ul_Echo_Time_Side_Back/58<7)&&(ul_Echo_Time_Front/58>20))//if both less then 7 left
 {
   servo_LeftMotor.writeMicroseconds(1700);
    servo_RightMotor.writeMicroseconds(1900);
+
 }
 if((ul_Echo_Time_Front/58>20)&&(ul_Echo_Time_Side_Front/58>8)&&(ul_Echo_Time_Side_Back/58<6))//if front greater then 8 and back less then 8 right
 {
 servo_LeftMotor.writeMicroseconds(1900);
    servo_RightMotor.writeMicroseconds(1700);
+
 }
 if((ul_Echo_Time_Front/58>20)&&(ul_Echo_Time_Side_Front/58<6)&&(ul_Echo_Time_Side_Back/58>8))//if back is greater and front is less left
 {
 servo_LeftMotor.writeMicroseconds(1700);
    servo_RightMotor.writeMicroseconds(1900);
+   
 }
 if((ul_Echo_Time_Front/58<30)&&((ul_Echo_Time_Side_Front/58)-(ul_Echo_Time_Side_Back/58)>3))//for courners 
 {
@@ -343,27 +348,29 @@ if((ul_Echo_Time_Front/58<30)&&((ul_Echo_Time_Side_Front/58)-(ul_Echo_Time_Side_
  servo_RightMotor.writeMicroseconds(2200);
  servo_LeftMotor.writeMicroseconds(1200);
 
+
 }
-if((ul_Echo_Time_Front/58<20))//courners
+if((ul_Echo_Time_Front/58<20)&&(ul_Echo_Time_Side_Front/58>2))//courners
 {
   
  servo_RightMotor.writeMicroseconds(2200);
  servo_LeftMotor.writeMicroseconds(1200);
-
 }
-if((ul_Echo_Time_Side_Front/58)<2 && (ul_Echo_Time_Side_Back/58)>4)//for when it gets stuck 
+
+if((ul_Echo_Time_Side_Front/58<=2))//for when it gets stuck 
 {
   
- servo_RightMotor.writeMicroseconds(ci_Right_Motor_Stop);
- servo_LeftMotor.writeMicroseconds(1150);
+ servo_RightMotor.writeMicroseconds(1600);
+ servo_LeftMotor.writeMicroseconds(1200);
+  
 
 }
 
-if (((gauss >150) || (gauss < 0))&& stayout == 0){
+if (((gauss >80) || (gauss < 40))&& stayout == 0){
            halleffectcount++;
  }
  
- if (((gauss >150) || (gauss < 0))&& halleffectcount > 8){
+ if (((gauss >80) || (gauss < 40))&& halleffectcount > 8){
   
            servo_RightMotor.writeMicroseconds(ci_Right_Motor_Stop);
            servo_LeftMotor.writeMicroseconds(ci_Left_Motor_Stop);
